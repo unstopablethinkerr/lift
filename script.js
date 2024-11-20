@@ -1,80 +1,67 @@
+const lift = document.getElementById('lift');
+const floorButtons = document.querySelectorAll('.floor-btn');
+const currentFloorDisplay = document.getElementById('current-floor');
+const directionDisplay = document.getElementById('direction');
+const personCountDisplay = document.getElementById('person-count');
+const totalWeightDisplay = document.getElementById('total-weight');
+
 let currentFloor = 1;
-let direction = "Idle";
+let queue = [];
 let personCount = 0;
 let totalWeight = 0;
-const maxWeight = 500;
-const floorQueue = [];
 
-const liftElement = document.getElementById('lift');
-const floorButtons = document.querySelectorAll('.floor-button');
-const addPersonBtn = document.getElementById('add-person');
-const removePersonBtn = document.getElementById('remove-person');
-
-function updateDisplay() {
-  document.getElementById('current-floor').textContent = `Floor: ${currentFloor}`;
-  document.getElementById('current-direction').textContent = `Direction: ${direction}`;
-  document.getElementById('person-count').textContent = `Persons: ${personCount}`;
-  document.getElementById('total-weight').textContent = `Weight: ${totalWeight} kg`;
-
-  floorButtons.forEach(button => {
-    const floor = parseInt(button.dataset.floor);
-    if (floorQueue.includes(floor)) {
-      button.classList.add('active');
-    } else {
-      button.classList.remove('active');
-    }
-  });
-}
+const FLOOR_HEIGHT = 100; // Height in pixels
+const MAX_WEIGHT = 500;
 
 function moveLift() {
-  if (floorQueue.length === 0) {
-    direction = "Idle";
-    updateDisplay();
-    return;
-  }
+    if (queue.length > 0) {
+        const nextFloor = queue.shift();
+        const direction = nextFloor > currentFloor ? 'Up' : 'Down';
+        directionDisplay.textContent = direction;
 
-  const targetFloor = floorQueue.shift();
-  const distance = Math.abs(targetFloor - currentFloor);
+        lift.style.bottom = `${(nextFloor - 1) * FLOOR_HEIGHT}px`;
+        setTimeout(() => {
+            currentFloor = nextFloor;
+            currentFloorDisplay.textContent = currentFloor;
+            directionDisplay.textContent = 'Idle';
+            floorButtons.forEach(btn => btn.classList.remove('active'));
+            moveLift();
+        }, Math.abs(nextFloor - currentFloor) * 1000); // Delay based on floors
+    }
+}
 
-  direction = targetFloor > currentFloor ? "Up" : "Down";
-  updateDisplay();
-
-  liftElement.style.bottom = `${(targetFloor - 1) * 20}%`;
-
-  setTimeout(() => {
-    currentFloor = targetFloor;
-    moveLift();
-  }, distance * 2000);
+function addFloorRequest(floor) {
+    if (!queue.includes(floor) && floor !== currentFloor) {
+        queue.push(floor);
+        queue.sort((a, b) => Math.abs(a - currentFloor) - Math.abs(b - currentFloor)); // Prioritize nearest
+        floorButtons[floor - 1].classList.add('active');
+        moveLift();
+    }
 }
 
 floorButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const targetFloor = parseInt(button.dataset.floor);
-    if (!floorQueue.includes(targetFloor)) {
-      floorQueue.push(targetFloor);
-      floorQueue.sort((a, b) => {
-        if (direction === "Up") return a - b;
-        else return b - a;
-      });
-      if (direction === "Idle") moveLift();
+    button.addEventListener('click', () => {
+        const floor = parseInt(button.dataset.floor);
+        addFloorRequest(floor);
+    });
+});
+
+document.getElementById('add-person').addEventListener('click', () => {
+    if (totalWeight + 50 <= MAX_WEIGHT) {
+        personCount++;
+        totalWeight += 50;
+        personCountDisplay.textContent = personCount;
+        totalWeightDisplay.textContent = totalWeight;
+    } else {
+        alert('Weight limit exceeded!');
     }
-    updateDisplay();
-  });
 });
 
-addPersonBtn.addEventListener('click', () => {
-  personCount++;
-  totalWeight += 50;
-  updateDisplay();
+document.getElementById('remove-person').addEventListener('click', () => {
+    if (personCount > 0) {
+        personCount--;
+        totalWeight -= 50;
+        personCountDisplay.textContent = personCount;
+        totalWeightDisplay.textContent = totalWeight;
+    }
 });
-
-removePersonBtn.addEventListener('click', () => {
-  if (personCount > 0) {
-    personCount--;
-    totalWeight -= 50;
-    updateDisplay();
-  }
-});
-
-// Initialize display
-updateDisplay();
