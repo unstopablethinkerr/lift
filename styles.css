@@ -1,60 +1,95 @@
 /* styles.css */
+
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  background: linear-gradient(to bottom, #87cefa, #f0f0f0);
   margin: 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
 }
 
-.lift-container {
+.building-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 200px;
-}
-
-.display {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 20px;
-  font-size: 1.2em;
-  font-weight: bold;
+  align-items: flex-start;
+  gap: 20px;
 }
 
 .lift-shaft {
   position: relative;
-  height: 400px; /* Adjust height to match the number of floors */
-  width: 100px;
-  background-color: #ddd;
-  border: 2px solid #bbb;
-  margin-bottom: 20px;
-  overflow: hidden;
+  height: 500px;
+  width: 150px;
+  background-color: #ccc;
+  border: 2px solid #888;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
 }
 
 .lift {
   position: absolute;
-  bottom: 0; /* Start at the first floor (bottom) */
-  height: 60px; /* Adjust lift height */
-  width: 80px;
-  margin: 10px auto;
+  bottom: 0;
+  width: 120px;
+  height: 70px;
   background-color: #333;
   border-radius: 5px;
+  color: white;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  color: #fff;
+  justify-content: center;
+  gap: 5px;
+  transition: bottom 1s linear;
+}
+
+.person-control {
+  text-align: center;
+}
+
+.person-btn {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.person-btn:hover {
+  background-color: #0056b3;
+}
+
+#person-count, #weight {
+  font-size: 0.8em;
+  margin: 2px 0;
+}
+
+.floor {
+  position: relative;
+  height: 100px;
+  width: 100%;
+  border-top: 2px solid #888;
+  text-align: center;
+  font-size: 1em;
+  color: #555;
+}
+
+.controls, .mobile-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.controls h2, .mobile-controls h2 {
   font-size: 1.2em;
-  text-transform: uppercase;
+  margin-bottom: 10px;
 }
 
 .floor-buttons {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   gap: 10px;
 }
 
@@ -62,9 +97,9 @@ body {
   width: 50px;
   height: 50px;
   background-color: #007bff;
+  color: white;
   border: none;
   border-radius: 50%;
-  color: #fff;
   font-size: 1em;
   cursor: pointer;
   transition: transform 0.2s;
@@ -72,8 +107,4 @@ body {
 
 .floor-button:hover {
   transform: scale(1.1);
-}
-
-.floor-button:active {
-  background-color: #0056b3;
 }
