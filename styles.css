@@ -27,9 +27,9 @@ body {
 }
 
 .floor {
-    width: 100%;
+    width: 50%;
     height: 20%;
-    border-top: 1px solid #666;
+    border-top: 2px solid #666;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,7 +39,7 @@ body {
 
 .lift {
     position: absolute;
-    width: 60px;
+    width: 45%;
     height: 18%;
     background-color: #4CAF50;
     border: 2px solid #333;
