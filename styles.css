@@ -1,120 +1,132 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f4f4f9;
+    background-color: #f9f9f9;
 }
 
 .container {
     display: flex;
     flex-direction: row;
-    width: 80%;
+    width: 90%;
     max-width: 1200px;
-    gap: 20px;
-}
-
-/* Floors */
-.floors {
-    display: flex;
-    flex-direction: column-reverse;
-    justify-content: space-around;
-    width: 20%;
-    position: relative;
-}
-
-.floor {
-    text-align: center;
-    height: 100px;
-    background: #e3e3e3;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-}
-
-/* Lift */
-.lift-container {
-    position: relative;
-    width: 20%;
-    height: 600px;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    overflow: hidden;
-}
-
-.lift {
-    width: 100%;
-    height: 100px;
-    background: #4CAF50;
-    position: absolute;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    transition: bottom 1s ease-in-out;
-}
-
-.lift-info {
-    text-align: center;
-    color: white;
-    font-size: 16px;
-}
-
-/* Controls */
-.controls {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
     justify-content: space-between;
+    align-items: center;
 }
 
-.buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+/* Mobile Controls */
+.mobile-controls {
+    flex: 1;
+    text-align: center;
+    margin-right: 20px;
 }
 
-.floor-btn {
-    padding: 10px;
+.mobile-buttons button {
+    width: 60px;
+    height: 60px;
+    margin: 5px;
     background: #007BFF;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background 0.3s;
+    font-size: 18px;
 }
 
-.floor-btn.active {
+.mobile-buttons button.active {
     background: yellow;
     color: black;
 }
 
-.person-controls {
+/* Building and Lift */
+.building {
+    position: relative;
+    flex: 2;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    margin-top: 20px;
+    align-items: flex-end;
+    height: 600px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
 }
 
-button {
-    padding: 10px 20px;
+.floors {
+    position: absolute;
+    left: 0;
+    width: 60px;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+}
+
+.floor {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #e3e3e3;
+    border: 1px solid #ccc;
+    font-size: 20px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.lift-container {
+    flex: 1;
+    position: relative;
+    width: 100px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.lift {
+    width: 80px;
+    height: 100px;
+    background: #4CAF50;
+    position: absolute;
+    border-radius: 5px;
+    transition: bottom 1s ease;
+}
+
+/* Lift Controls */
+.lift-controls {
+    flex: 1;
+    text-align: center;
+    margin-left: 20px;
+}
+
+.lift-buttons button {
+    width: 60px;
+    height: 60px;
+    margin: 5px;
+    background: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.lift-buttons button.active {
+    background: yellow;
+    color: black;
+}
+
+.person-controls button {
+    width: 100px;
+    height: 40px;
+    margin: 10px;
     font-size: 16px;
     cursor: pointer;
-    border: none;
     border-radius: 5px;
-    transition: background 0.3s;
 }
 
 #add-person {
