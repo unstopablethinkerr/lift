@@ -1,43 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Realistic Lift System</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lift System</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <div class="building">
-      <div class="floor" data-floor="5">Floor 5</div>
-      <div class="floor" data-floor="4">Floor 4</div>
-      <div class="floor" data-floor="3">Floor 3</div>
-      <div class="floor" data-floor="2">Floor 2</div>
-      <div class="floor" data-floor="1">Floor 1</div>
-      <div id="lift" class="lift">
-        <div class="lift-panel">
-          <div id="current-floor">Floor: 1</div>
-          <div id="current-direction">Direction: Idle</div>
-          <div id="person-count">Persons: 0</div>
-          <div id="total-weight">Weight: 0 kg</div>
+    <div class="container">
+        <!-- Building Floors -->
+        <div class="floors">
+            <div class="floor" id="floor-5">5</div>
+            <div class="floor" id="floor-4">4</div>
+            <div class="floor" id="floor-3">3</div>
+            <div class="floor" id="floor-2">2</div>
+            <div class="floor" id="floor-1">1</div>
         </div>
-      </div>
+
+        <!-- Lift Interface -->
+        <div class="lift-container">
+            <div class="lift" id="lift">
+                <div class="lift-info">
+                    <p>Floor: <span id="current-floor">1</span></p>
+                    <p>Direction: <span id="direction">Idle</span></p>
+                    <p>Persons: <span id="person-count">0</span></p>
+                    <p>Weight: <span id="total-weight">0</span> kg</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Control Panel -->
+        <div class="controls">
+            <div class="buttons">
+                <button class="floor-btn" data-floor="5">5</button>
+                <button class="floor-btn" data-floor="4">4</button>
+                <button class="floor-btn" data-floor="3">3</button>
+                <button class="floor-btn" data-floor="2">2</button>
+                <button class="floor-btn" data-floor="1">1</button>
+            </div>
+            <div class="person-controls">
+                <button id="add-person">Add Person</button>
+                <button id="remove-person">Remove Person</button>
+            </div>
+        </div>
     </div>
-    <div class="mobile-controls">
-      <h3>Mobile Controls</h3>
-      <div class="controls">
-        <button class="floor-button" data-floor="5">5</button>
-        <button class="floor-button" data-floor="4">4</button>
-        <button class="floor-button" data-floor="3">3</button>
-        <button class="floor-button" data-floor="2">2</button>
-        <button class="floor-button" data-floor="1">1</button>
-      </div>
-      <div class="person-controls">
-        <button id="add-person">Add Person</button>
-        <button id="remove-person">Remove Person</button>
-      </div>
-    </div>
-  </div>
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
