@@ -31,7 +31,7 @@ function moveLift(floor) {
     updateStatus();
 
     let distance = Math.abs(floor - currentFloor);
-    lift.style.transform = `translateY(-${(floor - 1) * 20}%)`;
+    lift.style.transform = `translateY(-${(floor - 1) * 100}%)`;
 
     setTimeout(() => {
         currentFloor = floor;
