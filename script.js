@@ -22,6 +22,19 @@ weightDisplay.textContent = 'Current Weight: 0 kg';
 document.querySelector('.lift-controls').appendChild(directionDisplay);
 document.querySelector('.lift-controls').appendChild(weightDisplay);
 
+
+const log = document.getElementById('log');
+
+function logMessage(message) {
+    const entry = document.createElement('div');
+    entry.textContent = message;
+    log.appendChild(entry);
+    log.scrollTop = log.scrollHeight; // Auto-scroll to the latest entry
+}
+
+// Example: logMessage('Lift moved to floor 3.');
+
+
 // Function to move the lift
 function moveLift() {
     if (isMoving || queue.length === 0) return;
