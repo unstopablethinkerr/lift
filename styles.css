@@ -1,91 +1,79 @@
+/* styles.css */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f0f0f0;
-    height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
-.container {
-    display: flex;
-    gap: 50px;
+.lift-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
 }
 
-.building {
-    position: relative;
-    width: 80px;
-    height: 100px;
-    background-color: #dcdcdc;
-    border: 2px solid #333;
-    display: flex;
-    flex-direction: column-reverse;
-    justify-content: space-between;
-    align-items: center;
+.display {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+  font-size: 1.2em;
+  font-weight: bold;
 }
 
-.floor {
-    width: 10%;
-    height: 20%;
-    border-top: 2px solid #666;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    position: relative;
+.lift-shaft {
+  position: relative;
+  height: 400px; /* Adjust height to match the number of floors */
+  width: 100px;
+  background-color: #ddd;
+  border: 2px solid #bbb;
+  margin-bottom: 20px;
+  overflow: hidden;
 }
 
 .lift {
-    position: absolute;
-    width: 45%;
-    height: 18%;
-    background-color: #4CAF50;
-    border: 2px solid #333;
-    transition: all 1s ease-in-out;
-    left: 10%;
-}
-
-.controls {
-    width: 300px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.controls h2, .controls h3 {
-    text-align: center;
-}
-
-.status p {
-    margin: 5px 0;
+  position: absolute;
+  bottom: 0; /* Start at the first floor (bottom) */
+  height: 60px; /* Adjust lift height */
+  width: 80px;
+  margin: 10px auto;
+  background-color: #333;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 1.2em;
+  text-transform: uppercase;
 }
 
 .floor-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.floor-btn {
-    width: 100px;
-    height: 40px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+.floor-button {
+  width: 50px;
+  height: 50px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1em;
+  cursor: pointer;
+  transition: transform 0.2s;
 }
 
-.floor-btn.active {
-    background-color: #ff9800;
+.floor-button:hover {
+  transform: scale(1.1);
 }
 
-.floor-btn:disabled {
-    background-color: #bbb;
-    cursor: not-allowed;
+.floor-button:active {
+  background-color: #0056b3;
 }
