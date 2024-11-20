@@ -26,7 +26,7 @@ function moveLift(targetFloor) {
   direction = targetFloor > currentFloor ? "Up" : "Down";
   updateDisplay();
 
-  liftElement.style.transform = `translateY(-${(targetFloor - 1) * 20}%)`;
+  liftElement.style.transform = `translateY(-${(targetFloor - 1) * 100}%)`;
 
   setTimeout(() => {
     currentFloor = targetFloor;
