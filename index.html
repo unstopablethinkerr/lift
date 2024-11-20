@@ -18,17 +18,20 @@
             <div class="lift" id="lift"></div>
         </div>
 
-        <!-- Lift Controls -->
+        <!-- Controls Section -->
         <div class="controls">
-            <h2>Lift Controls</h2>
+            <!-- Lift Status -->
             <div class="status">
+                <h2>Lift Status</h2>
                 <p>Current Floor: <span id="current-floor">1</span></p>
                 <p>Direction: <span id="direction">Stationary</span></p>
                 <p>Weight: <span id="weight">0</span> kg (Max: 500 kg)</p>
             </div>
 
+            <!-- Mobile Control -->
             <div class="mobile-control">
                 <h3>Mobile Control</h3>
+                <p>Direction: <span id="mobile-direction">Stationary</span></p>
                 <div class="floor-buttons">
                     <button class="floor-btn" onclick="callLift(1)">Floor 1</button>
                     <button class="floor-btn" onclick="callLift(2)">Floor 2</button>
@@ -38,8 +41,10 @@
                 </div>
             </div>
 
+            <!-- Inside Control -->
             <div class="inside-control">
                 <h3>Inside Control</h3>
+                <p>Direction: <span id="inside-direction">Stationary</span></p>
                 <div class="floor-buttons">
                     <button class="floor-btn" onclick="moveLift(1)">Floor 1</button>
                     <button class="floor-btn" onclick="moveLift(2)">Floor 2</button>
