@@ -139,14 +139,6 @@ body {
     color: white;
 }
 
-    .lift {
-    transition: bottom 1s ease; /* Smooth lift movement */
-}
-.mobile-btn.active,
-.lift-btn.active {
-    background-color: yellow;
-    color: black;
-}
 #direction,
 #weight {
     margin-top: 10px;
@@ -154,3 +146,13 @@ body {
     font-weight: bold;
 }
 
+#log {
+    margin-top: 20px;
+    height: 150px;
+    overflow-y: auto;
+    background: #f3f3f3;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+}
