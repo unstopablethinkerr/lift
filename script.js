@@ -3,6 +3,8 @@ const mobileButtons = document.querySelectorAll('.mobile-btn');
 const liftButtons = document.querySelectorAll('.lift-btn');
 const addPersonButton = document.getElementById('add-person');
 const removePersonButton = document.getElementById('remove-person');
+const directionDisplay = document.createElement('div');
+const weightDisplay = document.createElement('div');
 
 let currentFloor = 1;
 let queue = [];
@@ -10,24 +12,43 @@ let totalPersons = 0;
 const FLOOR_HEIGHT = 100; // Height for each floor
 const MAX_WEIGHT = 500; // Maximum weight in kg
 const PERSON_WEIGHT = 50; // Average weight per person
+let isMoving = false; // Track if the lift is moving
+
+// Create direction and weight displays
+directionDisplay.id = 'direction';
+directionDisplay.textContent = 'Direction: Idle';
+weightDisplay.id = 'weight';
+weightDisplay.textContent = 'Current Weight: 0 kg';
+document.querySelector('.lift-controls').appendChild(directionDisplay);
+document.querySelector('.lift-controls').appendChild(weightDisplay);
 
 // Function to move the lift
 function moveLift() {
-    if (queue.length > 0) {
-        const nextFloor = queue.shift();
-        const direction = nextFloor > currentFloor ? 'up' : 'down';
+    if (isMoving || queue.length === 0) return;
 
-        // Move the lift visually
-        lift.style.bottom = `${(nextFloor - 1) * FLOOR_HEIGHT}px`;
+    isMoving = true;
 
-        // Simulate time taken based on the number of floors
-        setTimeout(() => {
-            currentFloor = nextFloor;
-            console.log(`Lift is at floor ${currentFloor}`);
-            updateButtons();
-            moveLift(); // Continue processing the queue
-        }, Math.abs(nextFloor - currentFloor) * 1000); // 1 second per floor
-    }
+    const nextFloor = queue.shift();
+    const direction = nextFloor > currentFloor ? 'Up' : 'Down';
+
+    // Update direction display
+    directionDisplay.textContent = `Direction: ${direction}`;
+    lift.style.bottom = `${(nextFloor - 1) * FLOOR_HEIGHT}px`;
+
+    // Simulate time taken to move between floors
+    setTimeout(() => {
+        currentFloor = nextFloor;
+        console.log(`Lift is at floor ${currentFloor}`);
+        updateButtons();
+
+        // Check if more requests exist in the queue
+        if (queue.length === 0) {
+            directionDisplay.textContent = 'Direction: Idle';
+        }
+
+        isMoving = false;
+        moveLift(); // Continue processing the queue
+    }, Math.abs(nextFloor - currentFloor) * 1000); // 1 second per floor
 }
 
 // Add a floor request to the queue
@@ -44,18 +65,10 @@ function updateButtons() {
     mobileButtons.forEach((btn) => btn.classList.remove('active'));
     liftButtons.forEach((btn) => btn.classList.remove('active'));
 
-    mobileButtons.forEach((btn) => {
-        const floor = parseInt(btn.dataset.floor);
-        if (queue.includes(floor)) {
-            btn.classList.add('active');
-        }
-    });
-
-    liftButtons.forEach((btn) => {
-        const floor = parseInt(btn.dataset.floor);
-        if (queue.includes(floor)) {
-            btn.classList.add('active');
-        }
+    // Highlight active requests
+    queue.forEach((floor) => {
+        document.querySelector(`.mobile-btn[data-floor="${floor}"]`).classList.add('active');
+        document.querySelector(`.lift-btn[data-floor="${floor}"]`).classList.add('active');
     });
 }
 
@@ -81,7 +94,7 @@ liftButtons.forEach((button) => {
 addPersonButton.addEventListener('click', () => {
     if (totalPersons * PERSON_WEIGHT < MAX_WEIGHT) {
         totalPersons += 1;
-        console.log(`Added a person. Total persons: ${totalPersons}`);
+        updateWeightDisplay();
     } else {
         alert('Weight limit exceeded!');
     }
@@ -91,11 +104,17 @@ addPersonButton.addEventListener('click', () => {
 removePersonButton.addEventListener('click', () => {
     if (totalPersons > 0) {
         totalPersons -= 1;
-        console.log(`Removed a person. Total persons: ${totalPersons}`);
+        updateWeightDisplay();
     } else {
         alert('No persons to remove!');
     }
 });
+
+// Update weight display
+function updateWeightDisplay() {
+    const totalWeight = totalPersons * PERSON_WEIGHT;
+    weightDisplay.textContent = `Current Weight: ${totalWeight} kg`;
+}
 
 // Initialize lift position
 lift.style.bottom = `${(currentFloor - 1) * FLOOR_HEIGHT}px`;
