@@ -1,63 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lift Control and Monitoring</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lift System</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Building with Floors -->
-        <div class="building">
-            <div class="floor" id="floor-5">Floor 5</div>
-            <div class="floor" id="floor-4">Floor 4</div>
-            <div class="floor" id="floor-3">Floor 3</div>
-            <div class="floor" id="floor-2">Floor 2</div>
-            <div class="floor" id="floor-1">Floor 1</div>
-            <div class="lift" id="lift"></div>
-        </div>
-
-        <!-- Controls Section -->
-        <div class="controls">
-            <!-- Lift Status -->
-            <div class="status">
-                <h2>Lift Status</h2>
-                <p>Current Floor: <span id="current-floor">1</span></p>
-                <p>Direction: <span id="direction">Stationary</span></p>
-                <p>Weight: <span id="weight">0</span> kg (Max: 500 kg)</p>
-            </div>
-
-            <!-- Mobile Control -->
-            <div class="mobile-control">
-                <h3>Mobile Control</h3>
-                <p>Direction: <span id="mobile-direction">Stationary</span></p>
-                <div class="floor-buttons">
-                    <button class="floor-btn" onclick="callLift(1)">Floor 1</button>
-                    <button class="floor-btn" onclick="callLift(2)">Floor 2</button>
-                    <button class="floor-btn" onclick="callLift(3)">Floor 3</button>
-                    <button class="floor-btn" onclick="callLift(4)">Floor 4</button>
-                    <button class="floor-btn" onclick="callLift(5)">Floor 5</button>
-                </div>
-            </div>
-
-            <!-- Inside Control -->
-            <div class="inside-control">
-                <h3>Inside Control</h3>
-                <p>Direction: <span id="inside-direction">Stationary</span></p>
-                <div class="floor-buttons">
-                    <button class="floor-btn" onclick="moveLift(1)">Floor 1</button>
-                    <button class="floor-btn" onclick="moveLift(2)">Floor 2</button>
-                    <button class="floor-btn" onclick="moveLift(3)">Floor 3</button>
-                    <button class="floor-btn" onclick="moveLift(4)">Floor 4</button>
-                    <button class="floor-btn" onclick="moveLift(5)">Floor 5</button>
-                </div>
-                <label for="weight-input">Weight (kg): </label>
-                <input type="number" id="weight-input" placeholder="Enter weight">
-            </div>
-        </div>
+  <div class="lift-container">
+    <div class="display">
+      <span id="current-floor">Floor: 1</span>
+      <span id="direction">Direction: Idle</span>
     </div>
-
-    <script src="script.js"></script>
+    <div class="lift-shaft">
+      <div class="lift" id="lift"></div>
+    </div>
+    <div class="floor-buttons">
+      <button class="floor-button" data-floor="1">1</button>
+      <button class="floor-button" data-floor="2">2</button>
+      <button class="floor-button" data-floor="3">3</button>
+      <button class="floor-button" data-floor="4">4</button>
+      <button class="floor-button" data-floor="5">5</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
