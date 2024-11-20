@@ -48,7 +48,7 @@ function moveLift() {
 
         isMoving = false;
         moveLift(); // Continue processing the queue
-    }, Math.abs(nextFloor - currentFloor) * 1000); // 1 second per floor
+    }, Math.abs(nextFloor - currentFloor) * 1200); // 1 second per floor
 }
 
 // Add a floor request to the queue
