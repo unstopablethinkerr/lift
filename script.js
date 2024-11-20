@@ -31,7 +31,7 @@ function moveLift(floor) {
     updateStatus();
 
     let distance = Math.abs(floor - currentFloor);
-    lift.style.transform = `translateY(-${(floor - 1) * 100}%)`;
+    lift.style.transform = `translateY(-${(floor - 1) * 20}%)`;
 
     setTimeout(() => {
         currentFloor = floor;
@@ -39,7 +39,7 @@ function moveLift(floor) {
         updateStatus();
         isMoving = false;
         processQueue();
-    }, distance * 1000); // Simulate 1 second per floor
+    }, distance * 3000); // Simulate 1 second per floor
 }
 
 function callLift(floor) {
