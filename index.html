@@ -3,32 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart Lift System</title>
+  <title>Lift System Interface</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="building-container">
-    <!-- Lift Shaft -->
-    <div class="lift-shaft">
-      <div class="lift" id="lift">
-        <div class="person-control">
-          <button id="add-person" class="person-btn">+ Person</button>
-          <button id="remove-person" class="person-btn">- Person</button>
-          <p id="person-count">Persons: 0</p>
-          <p id="weight">Weight: 0 kg</p>
+  <div class="container">
+    <div class="lift-interface">
+      <div class="lift-shaft">
+        <div id="lift" class="lift">
+          <div class="lift-panel">
+            <div id="current-floor">Floor: 1</div>
+            <div id="current-direction">Direction: Idle</div>
+            <div id="person-count">Persons: 0</div>
+            <div id="total-weight">Weight: 0 kg</div>
+          </div>
         </div>
       </div>
-      <!-- Floor Labels -->
-      <div class="floor" data-floor="5">Floor 5</div>
-      <div class="floor" data-floor="4">Floor 4</div>
-      <div class="floor" data-floor="3">Floor 3</div>
-      <div class="floor" data-floor="2">Floor 2</div>
-      <div class="floor" data-floor="1">Floor 1</div>
-    </div>
-
-    <!-- Floor Controls -->
-    <div class="controls">
-      <h2>Lift Controls</h2>
       <div class="floor-buttons">
         <button class="floor-button" data-floor="5">5</button>
         <button class="floor-button" data-floor="4">4</button>
@@ -37,16 +27,18 @@
         <button class="floor-button" data-floor="1">1</button>
       </div>
     </div>
-
-    <!-- Mobile Controls -->
     <div class="mobile-controls">
-      <h2>Mobile Controls</h2>
-      <div class="floor-buttons">
+      <h3>Mobile Controls</h3>
+      <div class="controls">
         <button class="floor-button" data-floor="5">5</button>
         <button class="floor-button" data-floor="4">4</button>
         <button class="floor-button" data-floor="3">3</button>
         <button class="floor-button" data-floor="2">2</button>
         <button class="floor-button" data-floor="1">1</button>
+      </div>
+      <div class="person-controls">
+        <button id="add-person">Add Person</button>
+        <button id="remove-person">Remove Person</button>
       </div>
     </div>
   </div>
