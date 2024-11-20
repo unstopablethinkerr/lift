@@ -57,7 +57,7 @@ body {
 }
 
 .floors {
-    position: absolute;
+    position: center;
     left: 0;
     width: 60px;
     display: flex;
@@ -71,7 +71,7 @@ body {
     justify-content: center;
     align-items: center;
     background: #e3e3e3;
-    border: 1px solid #ccc;
+    border: 3px solid #ccc;
     font-size: 20px;
     margin-bottom: 5px;
     border-radius: 5px;
@@ -89,7 +89,7 @@ body {
 
 .lift {
     width: 80px;
-    height: 100px;
+    height: 90px;
     background: #4CAF50;
     position: absolute;
     border-radius: 5px;
