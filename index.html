@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lift Control and Monitoring</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="lift-container">
+        <!-- Lift Control from Outside -->
+        <div class="mobile-control">
+            <h2>Mobile Control</h2>
+            <div class="floor-buttons">
+                <button class="floor-btn" onclick="callLift(1)">Floor 1</button>
+                <button class="floor-btn" onclick="callLift(2)">Floor 2</button>
+                <button class="floor-btn" onclick="callLift(3)">Floor 3</button>
+                <button class="floor-btn" onclick="callLift(4)">Floor 4</button>
+                <button class="floor-btn" onclick="callLift(5)">Floor 5</button>
+            </div>
+        </div>
+
+        <!-- Lift Panel Inside -->
+        <div class="lift">
+            <div class="lift-door" id="lift-door"></div>
+            <div class="floor-indicator" id="floor-indicator">Floor 1</div>
+            <div class="inside-control">
+                <h2>Inside Control</h2>
+                <div class="floor-buttons">
+                    <button class="floor-btn" onclick="moveLift(1)">Floor 1</button>
+                    <button class="floor-btn" onclick="moveLift(2)">Floor 2</button>
+                    <button class="floor-btn" onclick="moveLift(3)">Floor 3</button>
+                    <button class="floor-btn" onclick="moveLift(4)">Floor 4</button>
+                    <button class="floor-btn" onclick="moveLift(5)">Floor 5</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
