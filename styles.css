@@ -57,9 +57,9 @@ body {
 }
 
 .floors {
-    position: center;
+    position: absolute;
     left: 0;
-    width: 60px;
+    width: 70px;
     display: flex;
     flex-direction: column-reverse;
     justify-content: space-between;
@@ -71,7 +71,7 @@ body {
     justify-content: center;
     align-items: center;
     background: #e3e3e3;
-    border: 3px solid #ccc;
+    border: 1px solid #ccc;
     font-size: 20px;
     margin-bottom: 5px;
     border-radius: 5px;
