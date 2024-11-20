@@ -1,98 +1,128 @@
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f9;
 }
 
 .container {
-  display: flex;
-  gap: 20px;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    max-width: 1200px;
+    gap: 20px;
 }
 
-.building {
-  position: relative;
-  width: 200px;
-  height: 600px;
-  border: 2px solid #333;
-  background: #eaeaea;
+/* Floors */
+.floors {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-around;
+    width: 20%;
+    position: relative;
 }
 
 .floor {
-  height: 20%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 1px solid #333;
-  font-weight: bold;
-  font-size: 18px;
+    text-align: center;
+    height: 100px;
+    background: #e3e3e3;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+/* Lift */
+.lift-container {
+    position: relative;
+    width: 20%;
+    height: 600px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    overflow: hidden;
 }
 
 .lift {
-  position: absolute;
-  width: 60px;
-  height: 18%;
-  background: #4CAF50;
-  left: 70px;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  transition: bottom 2s ease-in-out;
+    width: 100%;
+    height: 100px;
+    background: #4CAF50;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    transition: bottom 1s ease-in-out;
 }
 
-.lift-panel {
-  text-align: center;
+.lift-info {
+    text-align: center;
+    color: white;
+    font-size: 16px;
 }
 
-.floor-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 5px;
+/* Controls */
+.controls {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.floor-button.active {
-  background-color: #FFC107;
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.floor-button:hover {
-  background-color: #0056b3;
+.floor-btn {
+    padding: 10px;
+    background: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
 }
 
-.mobile-controls {
-  text-align: center;
+.floor-btn.active {
+    background: yellow;
+    color: black;
+}
+
+.person-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
 }
 
 button {
-  padding: 10px 15px;
-  font-size: 14px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #007BFF;
-  color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: background 0.3s;
 }
 
-button:hover {
-  background-color: #0056b3;
+#add-person {
+    background: #28a745;
+    color: white;
 }
 
-button:disabled {
-  background-color: #999;
-  cursor: not-allowed;
+#remove-person {
+    background: #dc3545;
+    color: white;
 }
