@@ -1,78 +1,62 @@
-// script.js
-
-// DOM elements
-const lift = document.getElementById("lift");
-const floorButtons = document.querySelectorAll(".floor-button");
-const personCountDisplay = document.getElementById("person-count");
-const weightDisplay = document.getElementById("weight");
-const addPersonBtn = document.getElementById("add-person");
-const removePersonBtn = document.getElementById("remove-person");
-
-// State variables
 let currentFloor = 1;
-let targetQueue = [];
-let isMoving = false;
+let direction = "Idle";
 let personCount = 0;
-const maxPersons = 10;
-const personWeight = 50; // 50 kg per person
+let totalWeight = 0;
+const maxWeight = 500;
+const floors = [1, 2, 3, 4, 5];
+const liftElement = document.getElementById('lift');
+const floorButtons = document.querySelectorAll('.floor-button');
+const addPersonBtn = document.getElementById('add-person');
+const removePersonBtn = document.getElementById('remove-person');
 
-// Event listeners for lift and mobile controls
-floorButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const targetFloor = parseInt(button.getAttribute("data-floor"));
-    if (!targetQueue.includes(targetFloor) && targetFloor !== currentFloor) {
-      targetQueue.push(targetFloor);
-      processQueue();
+function updateDisplay() {
+  document.getElementById('current-floor').textContent = `Floor: ${currentFloor}`;
+  document.getElementById('current-direction').textContent = `Direction: ${direction}`;
+  document.getElementById('person-count').textContent = `Persons: ${personCount}`;
+  document.getElementById('total-weight').textContent = `Weight: ${totalWeight} kg`;
+}
+
+function moveLift(targetFloor) {
+  if (totalWeight > maxWeight) {
+    alert("Weight limit exceeded! Reduce passengers to proceed.");
+    return;
+  }
+
+  const distance = Math.abs(targetFloor - currentFloor);
+  direction = targetFloor > currentFloor ? "Up" : "Down";
+  updateDisplay();
+
+  liftElement.style.transform = `translateY(-${(targetFloor - 1) * 20}%)`;
+
+  setTimeout(() => {
+    currentFloor = targetFloor;
+    direction = "Idle";
+    updateDisplay();
+  }, distance * 1000);
+}
+
+floorButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const targetFloor = parseInt(button.getAttribute('data-floor'));
+    if (targetFloor !== currentFloor) {
+      moveLift(targetFloor);
     }
   });
 });
 
-// Add and remove person logic
-addPersonBtn.addEventListener("click", () => {
-  if (personCount < maxPersons) {
-    personCount++;
-    updateWeightDisplay();
-  } else {
-    alert("Lift is at maximum capacity!");
-  }
+addPersonBtn.addEventListener('click', () => {
+  personCount++;
+  totalWeight += 50;
+  updateDisplay();
 });
 
-removePersonBtn.addEventListener("click", () => {
+removePersonBtn.addEventListener('click', () => {
   if (personCount > 0) {
     personCount--;
-    updateWeightDisplay();
+    totalWeight -= 50;
+    updateDisplay();
   }
 });
 
-function updateWeightDisplay() {
-  personCountDisplay.textContent = `Persons: ${personCount}`;
-  weightDisplay.textContent = `Weight: ${personCount * personWeight} kg`;
-}
-
-// Process floor queue
-function processQueue() {
-  if (isMoving || targetQueue.length === 0) return;
-
-  if (personCount * personWeight > maxPersons * personWeight) {
-    alert("Weight exceeds the maximum limit! Remove some persons to continue.");
-    return;
-  }
-
-  const nextFloor = targetQueue.shift();
-  moveToFloor(nextFloor);
-}
-
-// Move lift
-function moveToFloor(targetFloor) {
-  isMoving = true;
-  const distance = Math.abs(targetFloor - currentFloor);
-  const travelTime = distance * 1000; // 1 second per floor
-
-  lift.style.bottom = `${(targetFloor - 1) * 100}px`; // 100px per floor height
-
-  setTimeout(() => {
-    currentFloor = targetFloor;
-    isMoving = false;
-    processQueue();
-  }, travelTime);
-}
+// Initialize display
+updateDisplay();
