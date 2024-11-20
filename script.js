@@ -1,70 +1,56 @@
-let currentFloor = 1;
-let isMoving = false;
-let direction = "Stationary";
-let queue = [];
-let maxWeight = 500;
-let currentWeight = 0;
+// script.js
 
+// DOM elements
 const lift = document.getElementById("lift");
+const floorButtons = document.querySelectorAll(".floor-button");
 const currentFloorDisplay = document.getElementById("current-floor");
 const directionDisplay = document.getElementById("direction");
-const mobileDirectionDisplay = document.getElementById("mobile-direction");
-const insideDirectionDisplay = document.getElementById("inside-direction");
-const weightDisplay = document.getElementById("weight");
 
-function updateStatus() {
-    currentFloorDisplay.textContent = currentFloor;
-    directionDisplay.textContent = direction;
-    mobileDirectionDisplay.textContent = direction;
-    insideDirectionDisplay.textContent = direction;
-    weightDisplay.textContent = currentWeight;
-}
+// State variables
+let currentFloor = 1; // Start at floor 1
+let targetQueue = []; // Queue of target floors
+let isMoving = false;
 
-function moveLift(floor) {
-    if (isMoving || floor === currentFloor || currentWeight > maxWeight) {
-        return;
+// Event listener for floor buttons
+floorButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const targetFloor = parseInt(button.getAttribute("data-floor"));
+    if (!targetQueue.includes(targetFloor) && targetFloor !== currentFloor) {
+      targetQueue.push(targetFloor);
+      processQueue();
     }
-
-    isMoving = true;
-    direction = floor > currentFloor ? "Up" : "Down";
-
-    updateStatus();
-
-    let distance = Math.abs(floor - currentFloor);
-    lift.style.transform = `translateY(-${(floor - 1) * 20}%)`;
-
-    setTimeout(() => {
-        currentFloor = floor;
-        direction = "Stationary";
-        updateStatus();
-        isMoving = false;
-        processQueue();
-    }, distance * 3000); // Simulate 1 second per floor
-}
-
-function callLift(floor) {
-    if (!queue.includes(floor) && floor !== currentFloor) {
-        queue.push(floor);
-        document.querySelector(`.mobile-control .floor-btn:nth-child(${floor})`).classList.add("active");
-    }
-
-    processQueue();
-}
-
-function processQueue() {
-    if (isMoving || queue.length === 0) {
-        return;
-    }
-
-    queue.sort((a, b) => Math.abs(currentFloor - a) - Math.abs(currentFloor - b));
-    let nextFloor = queue.shift();
-    document.querySelector(`.mobile-control .floor-btn:nth-child(${nextFloor})`).classList.remove("active");
-
-    moveLift(nextFloor);
-}
-
-// Update weight input
-document.getElementById("weight-input").addEventListener("input", (e) => {
-    currentWeight = parseInt(e.target.value) || 0;
-    updateStatus();
+  });
 });
+
+// Function to process the floor queue
+function processQueue() {
+  if (isMoving || targetQueue.length === 0) return;
+
+  const nextFloor = targetQueue.shift();
+  moveToFloor(nextFloor);
+}
+
+// Function to move the lift to a target floor
+function moveToFloor(targetFloor) {
+  isMoving = true;
+  const direction = targetFloor > currentFloor ? "Up" : "Down";
+  const distance = Math.abs(targetFloor - currentFloor);
+  const travelTime = distance * 1000; // 1 second per floor
+
+  // Update display
+  directionDisplay.textContent = `Direction: ${direction}`;
+  currentFloorDisplay.textContent = `Floor: ${currentFloor}`;
+
+  // Animate lift movement
+  lift.style.transition = `bottom ${travelTime / 1000}s linear`;
+  lift.style.bottom = `${(targetFloor - 1) * 80}px`; // 80px per floor height
+
+  // Wait for the lift to reach the target floor
+  setTimeout(() => {
+    currentFloor = targetFloor;
+    currentFloorDisplay.textContent = `Floor: ${currentFloor}`;
+    directionDisplay.textContent = "Direction: Idle";
+    isMoving = false;
+    processQueue(); // Continue with the next floor in the queue
+  }, travelTime);
+}
